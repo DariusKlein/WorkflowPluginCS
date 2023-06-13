@@ -1,0 +1,38 @@
+{
+  "Actions": [
+    {
+      "Icon": "Images/icon",
+      "Name": "WorkflowTest",
+      "States": [
+        {
+          "Image": "Images/pluginAction",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "Workflow test",
+      "UUID": "com.darius.workflow.test.action",
+      "PropertyInspectorPath": "PropertyInspector/PluginActionPI.html"
+    }
+  ],
+  "Author": "Darius Klein",
+  "Name": "WorkflowPlugin",
+  "Description": "Personal workflow plugin",
+  "Icon": "Images/pluginIcon",
+  "URL": "workflow.kleinwizard.nl",
+  "Version": "1.0",
+  "CodePath": "WorkflowPlugin",
+  "Category": "Custom",
+  "CategoryIcon": "Images/categoryIcon",
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "4.9"
+  }
+}
