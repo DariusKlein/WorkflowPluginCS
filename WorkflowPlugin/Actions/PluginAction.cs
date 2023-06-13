@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WorkflowPlugin
 {
-    [PluginActionId("com.darius.workflow.test.action")]
+    [PluginActionId("com.darius.workflow.test")]
     public class PluginAction : PluginBase
     {
         private class PluginSettings

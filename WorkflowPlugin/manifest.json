@@ -12,17 +12,17 @@
       ],
       "SupportedInMultiActions": false,
       "Tooltip": "Workflow test",
-      "UUID": "com.darius.workflow.test.action",
+      "UUID": "com.darius.workflow.test",
       "PropertyInspectorPath": "PropertyInspector/PluginActionPI.html"
     }
   ],
   "Author": "Darius Klein",
-  "Name": "WorkflowPlugin",
+  "Name": "com.darius.workflow",
   "Description": "Personal workflow plugin",
   "Icon": "Images/pluginIcon",
-  "URL": "workflow.kleinwizard.nl",
+  "URL": "https://workflow.kleinwizard.nl",
   "Version": "1.0",
-  "CodePath": "WorkflowPlugin",
+  "CodePath": "com.darius.workflow",
   "Category": "Custom",
   "CategoryIcon": "Images/categoryIcon",
   "OS": [
