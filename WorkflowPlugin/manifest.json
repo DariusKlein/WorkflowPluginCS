@@ -13,7 +13,7 @@
       "SupportedInMultiActions": false,
       "Tooltip": "Workflow test",
       "UUID": "com.darius.workflow.test",
-      "PropertyInspectorPath": "PropertyInspector/PluginActionPI.html"
+      "PropertyInspectorPath": "PropertyInspector/testActionPI.html"
     }
   ],
   "Author": "Darius Klein",

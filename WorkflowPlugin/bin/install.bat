@@ -6,8 +6,8 @@ cd %1
 
 REM *** MAKE SURE THE FOLLOWING VARIABLES ARE CORRECT ***
 REM (Distribution tool be downloaded from: https://developer.elgato.com/documentation/stream-deck/sdk/exporting-your-plugin/ )
-SET OUTPUT_DIR=D:\PersonalProject\TEMP
-SET DISTRIBUTION_TOOL=D:\PersonalProject\DistributionTool.exe
+SET OUTPUT_DIR=D:\TEMP
+SET DISTRIBUTION_TOOL=D:\DistributionTool.exe
 SET STREAM_DECK_LOAD_TIMEOUT=7
 
 taskkill /f /im streamdeck.exe

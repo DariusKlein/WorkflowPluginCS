@@ -5,13 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Flurl.Http;
+using WorkflowPlugin.services;
 
 namespace WorkflowPlugin
 {
     [PluginActionId("com.darius.workflow.test")]
-    public class PluginAction : PluginBase
+    public class testAction : PluginBase
     {
         private class PluginSettings
         {
@@ -36,7 +39,7 @@ namespace WorkflowPlugin
         private PluginSettings settings;
 
         #endregion
-        public PluginAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
+        public testAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
         {
             if (payload.Settings == null || payload.Settings.Count == 0)
             {
@@ -63,10 +66,11 @@ namespace WorkflowPlugin
 
         public override void OnTick() { }
 
-        public override void ReceivedSettings(ReceivedSettingsPayload payload)
+        public override async void ReceivedSettings(ReceivedSettingsPayload payload)
         {
+            await Connection.SetTitleAsync( await Api.PostData(payload.Settings.ToString()));
             Tools.AutoPopulateSettings(settings, payload.Settings);
-            SaveSettings();
+            await SaveSettings();
         }
 
         public override void ReceivedGlobalSettings(ReceivedGlobalSettingsPayload payload) { }
