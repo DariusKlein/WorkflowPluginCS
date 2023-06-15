@@ -14,6 +14,26 @@
       "Tooltip": "Workflow test",
       "UUID": "com.darius.workflow.test",
       "PropertyInspectorPath": "PropertyInspector/testActionPI.html"
+    },
+    {
+      "Icon": "Images/icon",
+      "Name": "WorkflowCheckIn",
+      "States": [
+        {
+          "Image": "Images/pluginAction",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        },
+        {
+          "Image": "Images/pluginIcon",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "Workflow Check in/out",
+      "UUID": "com.darius.workflow.checkIn",
+      "PropertyInspectorPath": "PropertyInspector/checkInActionPI.html"
     }
   ],
   "Author": "Darius Klein",

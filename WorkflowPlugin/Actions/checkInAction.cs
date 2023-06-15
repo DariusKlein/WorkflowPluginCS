@@ -1,31 +1,38 @@
-﻿using System;
-using System.Threading.Tasks;
-using BarRaider.SdTools;
+﻿using BarRaider.SdTools;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using Flurl.Http;
 using WorkflowPlugin.services;
+
 
 namespace com.darius.workflow.Actions
 {
-    [PluginActionId("com.darius.workflow.test")]
-    public class testAction : KeypadBase
+    [PluginActionId("com.darius.workflow.checkIn")]
+    public class checkInAction : KeypadBase
     {
         private class PluginSettings
         {
             public static PluginSettings CreateDefaultSettings()
             {
                 PluginSettings instance = new PluginSettings();
-                instance.OutputFileName = String.Empty;
-                instance.InputString = String.Empty;
+                instance.CheckIn = false;
+                instance.CheckInDate = DateTime.Now;
                 return instance;
             }
 
             [FilenameProperty]
-            [JsonProperty(PropertyName = "outputFileName")]
-            public string OutputFileName { get; set; }
+            [JsonProperty(PropertyName = "checkIn")]
+            public bool CheckIn { get; set; }
 
-            [JsonProperty(PropertyName = "inputString")]
-            public string InputString { get; set; }
+            [JsonProperty(PropertyName = "CheckInDate")]
+            public DateTime CheckInDate { get; set; }
         }
 
         #region Private Members
@@ -33,7 +40,7 @@ namespace com.darius.workflow.Actions
         private PluginSettings settings;
 
         #endregion
-        public testAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
+        public checkInAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
         {
             if (payload.Settings == null || payload.Settings.Count == 0)
             {
@@ -51,7 +58,7 @@ namespace com.darius.workflow.Actions
             Logger.Instance.LogMessage(TracingLevel.INFO, $"Destructor called");
         }
 
-        public override void KeyPressed(KeyPayload payload)
+        public override async void KeyPressed(KeyPayload payload)
         {
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }
@@ -64,7 +71,7 @@ namespace com.darius.workflow.Actions
         {
             var jsonData = new { name = "Dev test", type = "check_in" };
             await Connection.SetTitleAsync( await Api.Events(jsonData));
-            await Connection.SetTitleAsync( await Api.Debug(payload.Settings.ToString()));
+            await Connection.SetTitleAsync( await Api.Debug(Connection.GetSettingsAsync().ToString()));
             Tools.AutoPopulateSettings(settings, payload.Settings);
             await SaveSettings();
         }
