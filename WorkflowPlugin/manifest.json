@@ -22,12 +22,12 @@
         {
           "Image": "Images/pluginAction",
           "TitleAlignment": "middle",
-          "FontSize": "12"
+          "FontSize": "10"
         },
         {
           "Image": "Images/pluginIcon",
           "TitleAlignment": "middle",
-          "FontSize": "12"
+          "FontSize": "10"
         }
       ],
       "SupportedInMultiActions": false,

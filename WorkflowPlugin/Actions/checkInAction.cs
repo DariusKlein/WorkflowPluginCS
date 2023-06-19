@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BarRaider.SdTools;
@@ -62,32 +64,67 @@ namespace com.darius.workflow.Actions
         public override async void KeyPressed(KeyPayload payload)
         {
             CheckInForm checkIn = new CheckInForm();
+            CheckOutForm checkOut = new CheckOutForm();
+
+
             var checkedIn = this.settings.CheckedIn;
             var name = "";
             var type = "";
+
             if (checkedIn)
             {
-                name = "check out";
-                type = "check_out";
-                this.settings.CheckedIn = false;
+                checkOut.CheckInId = this.settings.CurrentCheckIn;
+                checkOut.ShowDialog();
+
+                if (checkOut.CompletedText != null && checkOut.LearnedText != null)
+                {
+                    var checkOutJson = new
+                    {
+                        id = this.settings.CurrentCheckIn,
+                        gevoel = checkOut.GevoelText,
+                        planned = checkOut.PlannedText,
+                        completed = checkOut.CompletedText,
+                        learned = checkOut.LearnedText
+                    };
+                    
+                    await Api.UpdateCheckIn(checkOutJson);
+                    
+                    name = "check out";
+                    type = "check_out";
+                    this.settings.CheckedIn = false;
+                
+                    await Api.Events( new { name, type });
+                }
+                else
+                {
+                    await Connection.SetStateAsync(1);
+                }
+
             }
             else
             {
-                name = "check in";
-                type = "check_in";
-                this.settings.CheckedIn = true;
                 checkIn.ShowDialog();
-                
-                var checkInJson = new { gevoel = checkIn.GevoelText, planned = checkIn.PlannedText };
-                
-                JObject response = JObject.Parse(await Api.CreateCheckIn(checkInJson));
 
-                this.settings.CurrentCheckIn = (int)response["id"];
+                if (checkIn.GevoelText != null && checkIn.PlannedText != null)
+                {
+                    name = "check in";
+                    type = "check_in";
+                    this.settings.CheckedIn = true;
+                    
+                    var checkInJson = new { gevoel = checkIn.GevoelText, planned = checkIn.PlannedText };
+
+                    JObject response = JObject.Parse(await Api.CreateCheckIn(checkInJson));
+
+                    this.settings.CurrentCheckIn = (int)response["id"];
+                    
+                    await Api.Events( new { name, type });
+                }
+                else
+                {
+                    await Connection.SetStateAsync(0);
+                }
             }
-
-            var eventJson = new { name, type };
             
-            await Api.Events(eventJson);
             await Connection.SetTitleAsync(name);
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }

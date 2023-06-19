@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Flurl.Http;
+using Newtonsoft.Json.Linq;
 
 namespace WorkflowPlugin.services
 {
@@ -37,6 +39,26 @@ namespace WorkflowPlugin.services
                 .ReceiveString();
 
             return responseString;
+        }
+        public static async Task<string> UpdateCheckIn(object jsonData)
+        {
+            var responseString = await "https://workflow.kleinwizard.nl/checkIn/update"
+                .WithBasicAuth("darius", ">>QPSOnn" )
+                .PostJsonAsync(jsonData)
+                .ReceiveString();
+
+            return responseString;
+        }
+        public static async Task<JObject> GetCheckIn(object id)
+        {
+            var responseString = await "https://workflow.kleinwizard.nl/checkIn/get"
+                .WithBasicAuth("darius", ">>QPSOnn")
+                .SetQueryParam("id", id)
+                .GetAsync()
+                .ReceiveString();
+
+            return JObject.Parse(responseString);
+
         }
     }
 }

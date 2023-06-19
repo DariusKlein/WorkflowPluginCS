@@ -41,7 +41,7 @@
             this.LabelGevoel.Depth = 0;
             this.LabelGevoel.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.LabelGevoel.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
-            this.LabelGevoel.Location = new System.Drawing.Point(17, 82);
+            this.LabelGevoel.Location = new System.Drawing.Point(7, 83);
             this.LabelGevoel.MouseState = MaterialSkin.MouseState.HOVER;
             this.LabelGevoel.Name = "LabelGevoel";
             this.LabelGevoel.Size = new System.Drawing.Size(260, 35);

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using WorkflowPlugin.services;
 
 namespace com.darius.workflow.forms
 {
@@ -17,6 +18,10 @@ namespace com.darius.workflow.forms
     {
         public string GevoelText {get;set;} 
         public string PlannedText {get;set;}
+        public string CompletedText {get;set;} 
+        public string LearnedText {get;set;}
+        public int CheckInId {get;set;}
+
         public CheckOutForm()
         {
             InitializeComponent();
@@ -27,15 +32,23 @@ namespace com.darius.workflow.forms
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             Text = DateTime.Now.ToString();
+            
+            var response = await Api.GetCheckIn(CheckInId);
+
+            TextBoxGevoel.Text = (string)response["planned"];
+            TextBoxPlanned.Text = (string)response["gevoel"];
+            
         }
 
         private void submit_Click(object sender, EventArgs e)
         {
             this.GevoelText = this.TextBoxGevoel.Text;
             this.PlannedText = this.TextBoxPlanned.Text;
+            this.CompletedText = this.TextBoxCompleted.Text;
+            this.LearnedText = this.TextBoxLearned.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
