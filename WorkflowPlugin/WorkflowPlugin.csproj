@@ -96,11 +96,11 @@
   <ItemGroup>
     <Compile Include="Actions\checkInAction.cs" />
     <Compile Include="Actions\testAction.cs" />
-    <Compile Include="forms\Form1.cs">
+    <Compile Include="forms\CheckInForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="forms\CheckInForm.Designer.cs">
+      <DependentUpon>CheckInForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,8 +154,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="forms\CheckInForm.resx">
+      <DependentUpon>CheckInForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

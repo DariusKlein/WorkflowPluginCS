@@ -74,7 +74,7 @@ namespace com.darius.workflow.Actions
                 this.settings.CheckedIn = true;
             }
             
-            Form1 checkIn = new Form1();
+            CheckInForm checkIn = new CheckInForm();
             checkIn.ShowDialog();
             
             
