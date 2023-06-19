@@ -60,5 +60,16 @@ namespace WorkflowPlugin.services
             return JObject.Parse(responseString);
 
         }
+        
+        public static async Task<JObject> GetScorionCheckIn()
+        {
+            var responseString = await "https://workflow.kleinwizard.nl/checkIn/getNonScorion"
+                .WithBasicAuth("darius", ">>QPSOnn")
+                .GetAsync()
+                .ReceiveString();
+
+            return JObject.Parse(responseString);
+
+        }
     }
 }

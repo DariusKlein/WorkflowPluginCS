@@ -34,6 +34,21 @@
       "Tooltip": "Workflow Check in/out",
       "UUID": "com.darius.workflow.checkin",
       "PropertyInspectorPath": "PropertyInspector/checkInActionPI.html"
+    },
+    {
+      "Icon": "Images/icon",
+      "Name": "WorkflowScorionCheckIn",
+      "States": [
+        {
+          "Image": "Images/pluginAction",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "Workflow Check in scorion",
+      "UUID": "com.darius.workflow.checkintoscorion",
+      "PropertyInspectorPath": "PropertyInspector/testActionPI.html"
     }
   ],
   "Author": "Darius Klein",

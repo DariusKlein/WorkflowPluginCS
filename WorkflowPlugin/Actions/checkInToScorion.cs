@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using BarRaider.SdTools;
 using com.darius.workflow.forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WorkflowPlugin.services;
-using Microsoft.VisualBasic;
 
 namespace com.darius.workflow.Actions
 {
-    [PluginActionId("com.darius.workflow.checkin")]
-    public class CheckInAction : KeypadBase
+    [PluginActionId("com.darius.workflow.checkintoscorion")]
+    public class CheckInToScorionAction : KeypadBase
     {
         private class PluginSettings
         {
@@ -42,7 +38,7 @@ namespace com.darius.workflow.Actions
         private PluginSettings settings;
 
         #endregion
-        public CheckInAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
+        public CheckInToScorionAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
         {
             if (payload.Settings == null || payload.Settings.Count == 0)
             {
@@ -63,70 +59,10 @@ namespace com.darius.workflow.Actions
 
         public override async void KeyPressed(KeyPayload payload)
         {
-            CheckInForm checkIn = new CheckInForm();
             CheckOutForm checkOut = new CheckOutForm();
-
-
-            var checkedIn = this.settings.CheckedIn;
-            var name = "";
-            var type = "";
-
-            if (checkedIn)
-            {
-                checkOut.CheckInId = this.settings.CurrentCheckIn;
-                checkOut.ShowDialog();
-
-                if (checkOut.CompletedText != null && checkOut.LearnedText != null)
-                {
-                    var checkOutJson = new
-                    {
-                        id = this.settings.CurrentCheckIn,
-                        gevoel = checkOut.GevoelText,
-                        planned = checkOut.PlannedText,
-                        completed = checkOut.CompletedText,
-                        learned = checkOut.LearnedText,
-                        inSciron = checkOut.Scorion
-                    };
-                    
-                    await Api.UpdateCheckIn(checkOutJson);
-                    
-                    name = "check out";
-                    type = "check_out";
-                    this.settings.CheckedIn = false;
-                
-                    await Api.Events( new { name, type });
-                }
-                else
-                {
-                    await Connection.SetStateAsync(1);
-                }
-
-            }
-            else
-            {
-                checkIn.ShowDialog();
-
-                if (checkIn.GevoelText != null && checkIn.PlannedText != null)
-                {
-                    name = "check in";
-                    type = "check_in";
-                    this.settings.CheckedIn = true;
-                    
-                    var checkInJson = new { gevoel = checkIn.GevoelText, planned = checkIn.PlannedText };
-
-                    JObject response = JObject.Parse(await Api.CreateCheckIn(checkInJson));
-
-                    this.settings.CurrentCheckIn = (int)response["id"];
-                    
-                    await Api.Events( new { name, type });
-                }
-                else
-                {
-                    await Connection.SetStateAsync(0);
-                }
-            }
             
-            await Connection.SetTitleAsync(name);
+            checkOut.ShowDialog();
+            
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }
 

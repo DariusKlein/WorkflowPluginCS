@@ -14,7 +14,7 @@ using WorkflowPlugin.services;
 
 namespace com.darius.workflow.forms
 {
-    public partial class CheckOutForm : MaterialForm
+    public partial class CheckOutScorionForm : MaterialForm
     {
         public string GevoelText {get;set;} 
         public string PlannedText {get;set;}
@@ -24,7 +24,7 @@ namespace com.darius.workflow.forms
 
         public int CheckInId {get;set;}
 
-        public CheckOutForm()
+        public CheckOutScorionForm()
         {
             InitializeComponent();
 
@@ -38,8 +38,8 @@ namespace com.darius.workflow.forms
         {
             Text = DateTime.Now.ToString();
             
-            var response = await Api.GetCheckIn(CheckInId);
-
+            var response = await Api.GetScorionCheckIn();
+            
             TextBoxGevoel.Text = (string)response["planned"];
             TextBoxPlanned.Text = (string)response["gevoel"];
             TextBoxCompleted.Text = (string)response["completed"];
