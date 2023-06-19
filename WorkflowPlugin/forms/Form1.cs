@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MaterialSkin;
-using MaterialSkin.Controls;
 
 namespace com.darius.workflow.forms
 {
-    public partial class checkIn : MaterialForm
+    public partial class Form1 : MaterialForm
     {
-        public checkIn()
+        public Form1()
         {
             InitializeComponent();
 

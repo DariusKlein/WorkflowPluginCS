@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using BarRaider.SdTools;
+using com.darius.workflow.forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WorkflowPlugin.services;
@@ -70,9 +72,12 @@ namespace com.darius.workflow.Actions
                 name = "check in";
                 type = "check_in";
                 this.settings.CheckedIn = true;
-                
             }
-
+            
+            Form1 checkIn = new Form1();
+            checkIn.ShowDialog();
+            
+            
             var jsonData = new { name, type };
             
             await Api.Events(jsonData);
