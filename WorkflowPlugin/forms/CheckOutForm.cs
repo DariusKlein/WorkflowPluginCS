@@ -40,8 +40,8 @@ namespace com.darius.workflow.forms
             
             var response = await Api.GetCheckIn(CheckInId);
 
-            TextBoxGevoel.Text = (string)response["planned"];
-            TextBoxPlanned.Text = (string)response["gevoel"];
+            TextBoxGevoel.Text = (string)response["gevoel"];
+            TextBoxPlanned.Text = (string)response["planned"];
             TextBoxCompleted.Text = (string)response["completed"];
             TextBoxLearned.Text = (string)response["learned"];
             ScorionSaved.Checked = (bool)response["inScorion"];

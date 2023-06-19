@@ -7,7 +7,7 @@ using WorkflowPlugin.services;
 
 namespace com.darius.workflow.Actions
 {
-    [PluginActionId("com.darius.workflow.checkOutReview")]
+    [PluginActionId("com.darius.workflow.checkoutreview")]
     public class CheckOutReviewAction : KeypadBase
     {
         private class PluginSettings
@@ -45,23 +45,34 @@ namespace com.darius.workflow.Actions
 
         public override async void KeyPressed(KeyPayload payload)
         {
-            await Connection.SetTitleAsync("test");
             CheckOutReviewForm checkOutReview = new CheckOutReviewForm();
             
             checkOutReview.ShowDialog();
-            
-            var checkOutJson = new
+
+            if (checkOutReview.CheckInId == 0
+            || string.IsNullOrEmpty(checkOutReview.GevoelText)
+            || string.IsNullOrEmpty(checkOutReview.PlannedText)
+            || string.IsNullOrEmpty(checkOutReview.CompletedText)
+            || string.IsNullOrEmpty(checkOutReview.LearnedText))
             {
-                id = checkOutReview.CheckInId,
-                gevoel = checkOutReview.GevoelText,
-                planned = checkOutReview.PlannedText,
-                completed = checkOutReview.CompletedText,
-                learned = checkOutReview.LearnedText,
-                inSciron = checkOutReview.Scorion
-            };
+                await Connection.SetTitleAsync("error");
+            }
+            else
+            {
+                var checkOutReviewJson = new
+                {
+                    id = checkOutReview.CheckInId,
+                    gevoel = checkOutReview.GevoelText,
+                    planned = checkOutReview.PlannedText,
+                    completed = checkOutReview.CompletedText,
+                    learned = checkOutReview.LearnedText,
+                    inSciron = checkOutReview.Scorion
+                };
                     
-            await Api.UpdateCheckIn(checkOutJson);
-            
+                await Api.UpdateCheckIn(checkOutReviewJson);
+                
+                KeyPressed(payload);
+            }
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }
 

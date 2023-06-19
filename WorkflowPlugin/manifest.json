@@ -47,7 +47,7 @@
       ],
       "SupportedInMultiActions": false,
       "Tooltip": "Workflow Check out review",
-      "UUID": "com.darius.workflow.checkOutReview"
+      "UUID": "com.darius.workflow.checkoutreview"
     }
   ],
   "Author": "Darius Klein",
