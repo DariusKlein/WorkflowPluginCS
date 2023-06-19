@@ -32,7 +32,7 @@
       ],
       "SupportedInMultiActions": false,
       "Tooltip": "Workflow Check in/out",
-      "UUID": "com.darius.workflow.checkIn",
+      "UUID": "com.darius.workflow.checkin",
       "PropertyInspectorPath": "PropertyInspector/checkInActionPI.html"
     }
   ],

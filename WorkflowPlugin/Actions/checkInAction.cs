@@ -1,21 +1,15 @@
-﻿using BarRaider.SdTools;
+﻿using System;
+using System.Threading.Tasks;
+using BarRaider.SdTools;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Flurl.Http;
 using WorkflowPlugin.services;
 
 
 namespace com.darius.workflow.Actions
 {
-    [PluginActionId("com.darius.workflow.checkIn")]
-    public class checkInAction : KeypadBase
+    [PluginActionId("com.darius.workflow.checkin")]
+    public class CheckInAction : KeypadBase
     {
         private class PluginSettings
         {
@@ -40,7 +34,7 @@ namespace com.darius.workflow.Actions
         private PluginSettings settings;
 
         #endregion
-        public checkInAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
+        public CheckInAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
         {
             if (payload.Settings == null || payload.Settings.Count == 0)
             {
@@ -60,6 +54,9 @@ namespace com.darius.workflow.Actions
 
         public override async void KeyPressed(KeyPayload payload)
         {
+            var jsonData = new { name = "Dev test", type = "check_in" };
+            await Connection.SetTitleAsync( await Api.Events(jsonData));
+            await Connection.SetTitleAsync( await Api.Debug(payload.Settings.ToString()));
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }
 
@@ -69,9 +66,6 @@ namespace com.darius.workflow.Actions
 
         public override async void ReceivedSettings(ReceivedSettingsPayload payload)
         {
-            var jsonData = new { name = "Dev test", type = "check_in" };
-            await Connection.SetTitleAsync( await Api.Events(jsonData));
-            await Connection.SetTitleAsync( await Api.Debug(Connection.GetSettingsAsync().ToString()));
             Tools.AutoPopulateSettings(settings, payload.Settings);
             await SaveSettings();
         }

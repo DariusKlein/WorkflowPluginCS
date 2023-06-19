@@ -51,8 +51,11 @@ namespace com.darius.workflow.Actions
             Logger.Instance.LogMessage(TracingLevel.INFO, $"Destructor called");
         }
 
-        public override void KeyPressed(KeyPayload payload)
+        public override async void KeyPressed(KeyPayload payload)
         {
+            var jsonData = new { name = "Dev test", type = "check_in" };
+            await Connection.SetTitleAsync( await Api.Events(jsonData));
+            await Connection.SetTitleAsync( await Api.Debug(payload.Settings.ToString()));
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }
 
@@ -62,9 +65,6 @@ namespace com.darius.workflow.Actions
 
         public override async void ReceivedSettings(ReceivedSettingsPayload payload)
         {
-            var jsonData = new { name = "Dev test", type = "check_in" };
-            await Connection.SetTitleAsync( await Api.Events(jsonData));
-            await Connection.SetTitleAsync( await Api.Debug(payload.Settings.ToString()));
             Tools.AutoPopulateSettings(settings, payload.Settings);
             await SaveSettings();
         }
