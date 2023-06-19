@@ -4,7 +4,7 @@ using BarRaider.SdTools;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WorkflowPlugin.services;
-
+using Microsoft.VisualBasic;
 
 namespace com.darius.workflow.Actions
 {
@@ -16,14 +16,14 @@ namespace com.darius.workflow.Actions
             public static PluginSettings CreateDefaultSettings()
             {
                 PluginSettings instance = new PluginSettings();
-                instance.CheckIn = false;
+                instance.CheckedIn = false;
                 instance.CheckInDate = DateTime.Now;
                 return instance;
             }
 
             [FilenameProperty]
             [JsonProperty(PropertyName = "checkIn")]
-            public bool CheckIn { get; set; }
+            public bool CheckedIn { get; set; }
 
             [JsonProperty(PropertyName = "CheckInDate")]
             public DateTime CheckInDate { get; set; }
@@ -44,6 +44,7 @@ namespace com.darius.workflow.Actions
             else
             {
                 this.settings = payload.Settings.ToObject<PluginSettings>();
+                Connection.SetStateAsync(Convert.ToUInt16(this.settings.CheckedIn));
             }
         }
 
@@ -54,9 +55,28 @@ namespace com.darius.workflow.Actions
 
         public override async void KeyPressed(KeyPayload payload)
         {
-            var jsonData = new { name = "Dev test", type = "check_in" };
-            await Connection.SetTitleAsync( await Api.Events(jsonData));
-            await Connection.SetTitleAsync( await Api.Debug(payload.Settings.ToString()));
+            var checkedIn = this.settings.CheckedIn;
+            var name = "";
+            var type = "";
+            if (checkedIn)
+            {
+                name = "check out";
+                type = "check_out";
+                this.settings.CheckedIn = false;
+                
+            }
+            else
+            {
+                name = "check in";
+                type = "check_in";
+                this.settings.CheckedIn = true;
+                
+            }
+
+            var jsonData = new { name, type };
+            
+            await Api.Events(jsonData);
+            await Connection.SetTitleAsync(name);
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }
 
