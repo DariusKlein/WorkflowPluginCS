@@ -39,10 +39,6 @@
             this.TextBoxLearned = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.LabelLearned = new MaterialSkin.Controls.MaterialLabel();
             this.ScorionSaved = new MaterialSkin.Controls.MaterialCheckbox();
-            this.materialCheckbox1 = new MaterialSkin.Controls.MaterialCheckbox();
-            this.materialCheckbox2 = new MaterialSkin.Controls.MaterialCheckbox();
-            this.materialCheckbox3 = new MaterialSkin.Controls.MaterialCheckbox();
-            this.materialCheckbox4 = new MaterialSkin.Controls.MaterialCheckbox();
             this.SuspendLayout();
             // 
             // LabelGevoel
@@ -205,75 +201,11 @@
             this.ScorionSaved.UseVisualStyleBackColor = true;
             this.ScorionSaved.CheckedChanged += new System.EventHandler(this.materialCheckbox1_CheckedChanged);
             // 
-            // materialCheckbox1
-            // 
-            this.materialCheckbox1.Depth = 0;
-            this.materialCheckbox1.Location = new System.Drawing.Point(283, 374);
-            this.materialCheckbox1.Margin = new System.Windows.Forms.Padding(0);
-            this.materialCheckbox1.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialCheckbox1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCheckbox1.Name = "materialCheckbox1";
-            this.materialCheckbox1.ReadOnly = false;
-            this.materialCheckbox1.Ripple = true;
-            this.materialCheckbox1.Size = new System.Drawing.Size(234, 38);
-            this.materialCheckbox1.TabIndex = 13;
-            this.materialCheckbox1.Text = "Saved in scorion";
-            this.materialCheckbox1.UseVisualStyleBackColor = true;
-            // 
-            // materialCheckbox2
-            // 
-            this.materialCheckbox2.Depth = 0;
-            this.materialCheckbox2.Location = new System.Drawing.Point(291, 382);
-            this.materialCheckbox2.Margin = new System.Windows.Forms.Padding(0);
-            this.materialCheckbox2.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialCheckbox2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCheckbox2.Name = "materialCheckbox2";
-            this.materialCheckbox2.ReadOnly = false;
-            this.materialCheckbox2.Ripple = true;
-            this.materialCheckbox2.Size = new System.Drawing.Size(234, 38);
-            this.materialCheckbox2.TabIndex = 14;
-            this.materialCheckbox2.Text = "Saved in scorion";
-            this.materialCheckbox2.UseVisualStyleBackColor = true;
-            // 
-            // materialCheckbox3
-            // 
-            this.materialCheckbox3.Depth = 0;
-            this.materialCheckbox3.Location = new System.Drawing.Point(299, 390);
-            this.materialCheckbox3.Margin = new System.Windows.Forms.Padding(0);
-            this.materialCheckbox3.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialCheckbox3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCheckbox3.Name = "materialCheckbox3";
-            this.materialCheckbox3.ReadOnly = false;
-            this.materialCheckbox3.Ripple = true;
-            this.materialCheckbox3.Size = new System.Drawing.Size(234, 38);
-            this.materialCheckbox3.TabIndex = 15;
-            this.materialCheckbox3.Text = "Saved in scorion";
-            this.materialCheckbox3.UseVisualStyleBackColor = true;
-            // 
-            // materialCheckbox4
-            // 
-            this.materialCheckbox4.Depth = 0;
-            this.materialCheckbox4.Location = new System.Drawing.Point(307, 398);
-            this.materialCheckbox4.Margin = new System.Windows.Forms.Padding(0);
-            this.materialCheckbox4.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialCheckbox4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCheckbox4.Name = "materialCheckbox4";
-            this.materialCheckbox4.ReadOnly = false;
-            this.materialCheckbox4.Ripple = true;
-            this.materialCheckbox4.Size = new System.Drawing.Size(234, 38);
-            this.materialCheckbox4.TabIndex = 16;
-            this.materialCheckbox4.Text = "Saved in scorion";
-            this.materialCheckbox4.UseVisualStyleBackColor = true;
-            // 
             // CheckOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 787);
-            this.Controls.Add(this.materialCheckbox4);
-            this.Controls.Add(this.materialCheckbox3);
-            this.Controls.Add(this.materialCheckbox2);
-            this.Controls.Add(this.materialCheckbox1);
             this.Controls.Add(this.ScorionSaved);
             this.Controls.Add(this.TextBoxLearned);
             this.Controls.Add(this.LabelLearned);
@@ -292,13 +224,7 @@
             this.PerformLayout();
         }
 
-        private MaterialSkin.Controls.MaterialCheckbox materialCheckbox2;
-        private MaterialSkin.Controls.MaterialCheckbox materialCheckbox3;
-        private MaterialSkin.Controls.MaterialCheckbox materialCheckbox4;
-
         private MaterialSkin.Controls.MaterialCheckbox ScorionSaved;
-
-        private MaterialSkin.Controls.MaterialCheckbox materialCheckbox1;
 
         private MaterialSkin.Controls.MaterialMultiLineTextBox TextBoxCompleted;
         private MaterialSkin.Controls.MaterialLabel LabelComleted;

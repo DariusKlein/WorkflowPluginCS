@@ -2,35 +2,22 @@
 using System.Threading.Tasks;
 using BarRaider.SdTools;
 using com.darius.workflow.forms;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WorkflowPlugin.services;
 
 namespace com.darius.workflow.Actions
 {
-    [PluginActionId("com.darius.workflow.checkintoscorion")]
-    public class CheckInToScorionAction : KeypadBase
+    [PluginActionId("com.darius.workflow.checkOutReview")]
+    public class CheckOutReviewAction : KeypadBase
     {
         private class PluginSettings
         {
             public static PluginSettings CreateDefaultSettings()
             {
                 PluginSettings instance = new PluginSettings();
-                instance.CheckedIn = false;
-                instance.CheckInDate = DateTime.Now;
-                instance.CurrentCheckIn = 0;
                 return instance;
             }
 
-            [FilenameProperty]
-            [JsonProperty(PropertyName = "checkIn")]
-            public bool CheckedIn { get; set; }
-
-            [JsonProperty(PropertyName = "CheckInDate")]
-            public DateTime CheckInDate { get; set; }
-            
-            [JsonProperty(PropertyName = "currentCheckIn")]
-            public int CurrentCheckIn { get; set; }
         }
 
         #region Private Members
@@ -38,7 +25,7 @@ namespace com.darius.workflow.Actions
         private PluginSettings settings;
 
         #endregion
-        public CheckInToScorionAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
+        public CheckOutReviewAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
         {
             if (payload.Settings == null || payload.Settings.Count == 0)
             {
@@ -48,7 +35,6 @@ namespace com.darius.workflow.Actions
             else
             {
                 this.settings = payload.Settings.ToObject<PluginSettings>();
-                Connection.SetStateAsync(Convert.ToUInt16(this.settings.CheckedIn));
             }
         }
 
@@ -59,9 +45,22 @@ namespace com.darius.workflow.Actions
 
         public override async void KeyPressed(KeyPayload payload)
         {
-            CheckOutForm checkOut = new CheckOutForm();
+            await Connection.SetTitleAsync("test");
+            CheckOutReviewForm checkOutReview = new CheckOutReviewForm();
             
-            checkOut.ShowDialog();
+            checkOutReview.ShowDialog();
+            
+            var checkOutJson = new
+            {
+                id = checkOutReview.CheckInId,
+                gevoel = checkOutReview.GevoelText,
+                planned = checkOutReview.PlannedText,
+                completed = checkOutReview.CompletedText,
+                learned = checkOutReview.LearnedText,
+                inSciron = checkOutReview.Scorion
+            };
+                    
+            await Api.UpdateCheckIn(checkOutJson);
             
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }

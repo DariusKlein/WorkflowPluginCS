@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\checkInAction.cs" />
-    <Compile Include="Actions\checkInToScorion.cs" />
+    <Compile Include="Actions\checkOutReview.cs" />
     <Compile Include="Actions\testAction.cs" />
     <Compile Include="forms\CheckInForm.cs">
       <SubType>Form</SubType>
@@ -109,11 +109,11 @@
     <Compile Include="forms\CheckOutForm.Designer.cs">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\CheckOutScorionForm.cs">
+    <Compile Include="forms\CheckOutReviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\CheckOutScorionForm.Designer.cs">
-      <DependentUpon>CheckOutScorionForm.cs</DependentUpon>
+    <Compile Include="forms\CheckOutReviewForm.Designer.cs">
+      <DependentUpon>CheckOutReviewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,8 +173,8 @@
     <EmbeddedResource Include="forms\CheckOutForm.resx">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\CheckOutScorionForm.resx">
-      <DependentUpon>CheckOutScorionForm.cs</DependentUpon>
+    <EmbeddedResource Include="forms\CheckOutReviewForm.resx">
+      <DependentUpon>CheckOutReviewForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -37,7 +37,7 @@
     },
     {
       "Icon": "Images/icon",
-      "Name": "WorkflowScorionCheckIn",
+      "Name": "WorkflowCheckOutReview",
       "States": [
         {
           "Image": "Images/pluginAction",
@@ -46,9 +46,8 @@
         }
       ],
       "SupportedInMultiActions": false,
-      "Tooltip": "Workflow Check in scorion",
-      "UUID": "com.darius.workflow.checkintoscorion",
-      "PropertyInspectorPath": "PropertyInspector/testActionPI.html"
+      "Tooltip": "Workflow Check out review",
+      "UUID": "com.darius.workflow.checkOutReview"
     }
   ],
   "Author": "Darius Klein",
