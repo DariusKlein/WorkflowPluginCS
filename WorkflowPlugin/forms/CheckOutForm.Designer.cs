@@ -1,6 +1,6 @@
 ﻿namespace com.darius.workflow.forms
 {
-    partial class CheckInForm
+    partial class CheckOutForm
     {
         /// <summary>
         /// Required designer variable.

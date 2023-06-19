@@ -13,11 +13,11 @@ using System.Windows.Forms.VisualStyles;
 
 namespace com.darius.workflow.forms
 {
-    public partial class CheckInForm : MaterialForm
+    public partial class CheckOutForm : MaterialForm
     {
         public string GevoelText {get;set;} 
         public string PlannedText {get;set;}
-        public CheckInForm()
+        public CheckOutForm()
         {
             InitializeComponent();
 
@@ -44,5 +44,6 @@ namespace com.darius.workflow.forms
         {
             Close();
         }
+        
     }
 }

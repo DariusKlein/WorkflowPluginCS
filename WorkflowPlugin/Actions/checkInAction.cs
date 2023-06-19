@@ -20,6 +20,7 @@ namespace com.darius.workflow.Actions
                 PluginSettings instance = new PluginSettings();
                 instance.CheckedIn = false;
                 instance.CheckInDate = DateTime.Now;
+                instance.CurrentCheckIn = 0;
                 return instance;
             }
 
@@ -29,6 +30,9 @@ namespace com.darius.workflow.Actions
 
             [JsonProperty(PropertyName = "CheckInDate")]
             public DateTime CheckInDate { get; set; }
+            
+            [JsonProperty(PropertyName = "currentCheckIn")]
+            public int CurrentCheckIn { get; set; }
         }
 
         #region Private Members
@@ -57,6 +61,7 @@ namespace com.darius.workflow.Actions
 
         public override async void KeyPressed(KeyPayload payload)
         {
+            CheckInForm checkIn = new CheckInForm();
             var checkedIn = this.settings.CheckedIn;
             var name = "";
             var type = "";
@@ -65,22 +70,24 @@ namespace com.darius.workflow.Actions
                 name = "check out";
                 type = "check_out";
                 this.settings.CheckedIn = false;
-                
             }
             else
             {
                 name = "check in";
                 type = "check_in";
                 this.settings.CheckedIn = true;
+                checkIn.ShowDialog();
+                
+                var checkInJson = new { gevoel = checkIn.GevoelText, planned = checkIn.PlannedText };
+                
+                JObject response = JObject.Parse(await Api.CreateCheckIn(checkInJson));
+
+                this.settings.CurrentCheckIn = (int)response["id"];
             }
+
+            var eventJson = new { name, type };
             
-            CheckInForm checkIn = new CheckInForm();
-            checkIn.ShowDialog();
-            
-            
-            var jsonData = new { name, type };
-            
-            await Api.Events(jsonData);
+            await Api.Events(eventJson);
             await Connection.SetTitleAsync(name);
             Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }
